@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ar" dir="rtl" manifest="900.manifest">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#07110a">
+  <title>GameYard | تثبيت ملفات PS4</title>
+  <style>
+    *{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Arial,Tahoma,sans-serif}body{color:#fff;background:#07110a}
+    .shell{min-height:100vh;min-height:100svh;display:grid;place-items:center;padding:24px;position:relative;overflow:hidden;background:linear-gradient(90deg,rgba(2,8,4,.96),rgba(3,12,6,.84)),url("./gameyard-logo.jpeg") center/cover no-repeat}
+    .shell:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 28% 38%,rgba(93,224,45,.22),transparent 34%),linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:auto,42px 42px,42px 42px}
+    .card{position:relative;width:min(680px,100%);padding:38px;border:1px solid rgba(255,255,255,.14);border-radius:28px;background:rgba(3,11,5,.88);box-shadow:0 28px 80px rgba(0,0,0,.52);text-align:center}
+    .brand{direction:ltr;display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:25px}.brand img{width:58px;height:58px;border:2px solid #7ee24b;border-radius:50%;object-fit:cover}.brand strong{font-size:24px;letter-spacing:.5px}.brand small{display:block;margin-top:5px;color:rgba(255,255,255,.55);font-size:10px;letter-spacing:2px}
+    .tag{display:inline-block;margin-bottom:13px;padding:7px 12px;border:1px solid rgba(169,255,112,.28);border-radius:999px;color:#a9ff70;background:rgba(98,215,45,.08);font-size:11px;font-weight:900;letter-spacing:1px}
+    h1{margin:0 0 12px;font-size:clamp(30px,5vw,48px)}#msgs{min-height:60px;margin:0;color:#e8f0e9;font-size:18px;font-weight:800;line-height:1.8}.ok{color:#a9ff70!important}.bad{color:#ff8787!important}
+    .track{height:12px;margin:25px 0 12px;overflow:hidden;border-radius:999px;background:rgba(255,255,255,.09)}#bar{width:4%;height:100%;border-radius:inherit;background:linear-gradient(90deg,#62d72d,#b6ff84);box-shadow:0 0 22px rgba(98,215,45,.4);transition:width .2s ease}.percent{direction:ltr;color:rgba(255,255,255,.55);font-size:12px;font-weight:800}
+    button{min-width:260px;margin-top:24px;padding:15px 24px;border:0;border-radius:15px;color:#07110a;background:linear-gradient(180deg,#a9ff70,#62d72d);font-size:17px;font-weight:900;cursor:pointer}button:disabled{opacity:.38;cursor:wait}.note{margin:15px 0 0;color:rgba(255,255,255,.48);font-size:11px;line-height:1.7}
+    @media(max-width:560px){.card{padding:29px 18px;border-radius:22px}.brand img{width:50px;height:50px}#msgs{font-size:16px}button{width:100%;min-width:0}}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="card">
+      <div class="brand"><img src="./gameyard-mark.jpg" alt="شعار GameYard"><span><strong>GameYard</strong><small>PS4 MULTI-FIRMWARE HOST</small></span></div>
+      <span class="tag">9.00–9.60</span>
+      <h1>تثبيت ملفات إصدارك</h1>
+      <p id="msgs">جارٍ بدء التخزين دون اتصال…</p>
+      <div class="track" aria-hidden="true"><div id="bar"></div></div>
+      <div class="percent" id="percent">0%</div>
+      <button id="go" type="button" disabled>جارٍ التثبيت…</button>
+      <p class="note">أبقِ الصفحة مفتوحة والإنترنت متصلًا حتى يكتمل التثبيت.</p>
+    </section>
+  </main>
+  <script>
+  (function(){
+    var msgs=document.getElementById("msgs"),bar=document.getElementById("bar"),percent=document.getElementById("percent"),go=document.getElementById("go"),ac=window.applicationCache,finished=false;
+    try{history.replaceState(null,null,"index.html")}catch(e){}
+    function progress(e){var p=e&&e.total?Math.round(e.loaded/e.total*100):0;if(p>0){bar.style.width=p+"%";percent.textContent=p+"%";msgs.textContent="جارٍ حفظ ملفات التشغيل…"}}
+    function done(){if(finished)return;finished=true;try{if(ac.status===ac.UPDATEREADY)ac.swapCache()}catch(e){}try{localStorage.setItem("multifw-cache-v1","1")}catch(e){}bar.style.width="100%";percent.textContent="100%";msgs.textContent="تم حفظ الملفات بنجاح — يمكنك الآن تشغيل GoldHEN";msgs.className="ok";go.disabled=false;go.textContent="العودة إلى التشغيل"}
+    function failed(){msgs.textContent="تعذر تثبيت الملفات. امسح بيانات متصفح PS4 ثم أعد المحاولة.";msgs.className="bad";go.disabled=false;go.textContent="إعادة المحاولة";go.onclick=function(){location.reload()}}
+    go.onclick=function(){location.replace("index.html")};
+    if(!ac){failed();return}ac.addEventListener("progress",progress,false);ac.addEventListener("cached",done,false);ac.addEventListener("updateready",done,false);ac.addEventListener("noupdate",done,false);ac.addEventListener("error",failed,false);
+    setTimeout(function(){if(ac.status===ac.IDLE||ac.status===ac.UPDATEREADY)done()},700);
+  })();
+  </script>
+</body>
+</html>
