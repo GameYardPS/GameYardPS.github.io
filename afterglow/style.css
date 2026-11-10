@@ -322,3 +322,10 @@ body.log #out {
 code {
   color: #9fb3d0;
 }
+
+/* GameYard PS4 readability fixes for the built-in browser */
+.meme { width: 280px; max-width: 43%; }
+.shell { gap: 28px; }
+.panel { width: 350px; max-width: 90%; }
+.afterglow-portrait { width: 92px; height: 92px; }
+@media (max-width: 640px) { .meme { width: 160px; max-width: 70%; } .panel { width: 92%; } }

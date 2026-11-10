@@ -16,12 +16,15 @@
     .track{height:12px;margin:25px 0 12px;overflow:hidden;border-radius:999px;background:rgba(255,255,255,.09)}#bar{width:4%;height:100%;border-radius:inherit;background:linear-gradient(90deg,#62d72d,#b6ff84);box-shadow:0 0 22px rgba(98,215,45,.4);transition:width .2s ease}.percent{direction:ltr;color:rgba(255,255,255,.55);font-size:12px;font-weight:800}
     button{min-width:260px;margin-top:24px;padding:15px 24px;border:0;border-radius:15px;color:#07110a;background:linear-gradient(180deg,#a9ff70,#62d72d);font-size:17px;font-weight:900;cursor:pointer}button:disabled{opacity:.38;cursor:wait}.note{margin:15px 0 0;color:rgba(255,255,255,.48);font-size:11px;line-height:1.7}
     @media(max-width:560px){.card{padding:29px 18px;border-radius:22px}.brand img{width:50px;height:50px}#msgs{font-size:16px}button{width:100%;min-width:0}}
-  </style>
+  
+/* PS4 WebKit fallback (CSS min() unsupported on some firmware builds) */
+.card { width: 94%; max-width: 760px; }
+</style>
 </head>
 <body>
   <main class="shell">
     <section class="card">
-      <div class="brand"><img src="./gameyard-portrait-v2.jpg" alt="الصورة الشخصية"><img src="./gameyard-badge-v2.jpg" alt="شعار GameYard الجديد"><span><strong>GameYard</strong><small>PS4 MULTI-FIRMWARE HOST</small></span></div>
+      <div class="brand"><img src="./gameyard-portrait-v3.jpg" alt="الصورة الشخصية"><img src="./gameyard-badge-v3.jpg" alt="شعار GameYard الجديد"><span><strong>GameYard</strong><small>PS4 MULTI-FIRMWARE HOST</small></span></div>
       <span class="tag">9.00–9.60</span>
       <h1>تثبيت ملفات إصدارك</h1>
       <p id="msgs">جارٍ بدء التخزين دون اتصال…</p>
