@@ -1,11 +1,13 @@
 CACHE MANIFEST
-# GameYard Afterglow home update / 2026-11-04 / v4
+# GameYard PS4 portrait and badge refresh / 2026-11-10 / v5
 # Legacy cache migration: GameYard multi-firmware v3 / 2026-10-06
 
 CACHE:
 index.html
 gameyard-logo.jpeg
 gameyard-mark.jpg
+gameyard-portrait-v2.jpg
+gameyard-badge-v2.jpg
 
 NETWORK:
 *

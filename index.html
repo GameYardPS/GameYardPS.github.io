@@ -4,11 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#07110a">
-  <meta name="site-version" content="gameyard-multifw-v4-afterglow">
+  <meta name="site-version" content="gameyard-multifw-v5-personal-brand-20261110">
   <meta name="source-revision" content="gamerhack/g2all-2026-10-06">
   <meta name="description" content="واجهة GameYard لتشغيل GoldHEN على إصدارات PS4 المدعومة من 7.00 إلى 14.00.">
   <title>GameYard | PS4 7.00–14.00 Host</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2307110a'/%3E%3Cpath d='M18 20h28v8H26v8h20v8H18z' fill='%2362d72d'/%3E%3C/svg%3E">
+  <link rel="icon" type="image/jpeg" href="./gameyard-badge-v2.jpg">
   <style>
     * { box-sizing: border-box; }
     html, body { margin: 0; min-height: 100%; font-family: Arial, Tahoma, sans-serif; }
@@ -107,6 +107,10 @@
       text-transform: uppercase;
     }
     .eyebrow:before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #62d72d; box-shadow: 0 0 0 5px rgba(98,215,45,.14); }
+    .hero-ident { direction: ltr; display: flex; justify-content: center; align-items: center; gap: 15px; margin: 0 auto 18px; }
+    .hero-ident img { display: block; width: 91px; height: 91px; object-fit: cover; border: 2px solid rgba(169,255,112,.62); box-shadow: 0 10px 32px rgba(46,188,43,.20); background: #0a140a; }
+    .hero-portrait { border-radius: 50%; }
+    .hero-badge { border-radius: 23px; }
     h1 { margin: 0; color: #fff; font-size: 68px; font-size: clamp(48px, 7vw, 76px); font-weight: 900; line-height: .96; letter-spacing: -2.5px; }
     .lede { max-width: 650px; margin: 17px auto 19px; color: #e8f0e9; font-size: 17px; font-weight: 700; line-height: 1.9; }
     .firmwares { direction: ltr; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 0 0 23px; }
@@ -164,6 +168,7 @@
       .version-chip { padding: 8px 10px; font-size: 10px; }
       main { padding: 22px 14px; }
       .hero { padding: 31px 18px 28px; border-radius: 23px; }
+      .hero-ident img { width: 69px; height: 69px; }
       h1 { font-size: 49px; letter-spacing: -2px; }
       .lede { font-size: 15px; line-height: 1.75; }
       .run { width: 100%; min-width: 0; padding: 16px 20px; }
@@ -184,7 +189,7 @@
   <div class="shell">
     <header>
       <a class="brand" href="./" aria-label="GameYard home">
-        <span class="mark"><img src="./gameyard-mark.jpg" alt="شعار GameYard"></span>
+        <span class="mark"><img src="./gameyard-portrait-v2.jpg" alt="صورة GameYard"></span>
         <span class="brand-copy"><strong>GameYard</strong><small>Gaming Center</small></span>
       </a>
       <span class="version-chip">PS4&nbsp; • &nbsp;7.00–14.00</span>
@@ -193,6 +198,7 @@
     <main>
       <section class="hero" aria-labelledby="title">
         <p class="eyebrow">GameYard PS4 Host</p>
+        <div class="hero-ident" aria-label="هوية GameYard"><img class="hero-portrait" src="./gameyard-portrait-v2.jpg" alt="الصورة الشخصية الكرتونية"><img class="hero-badge" src="./gameyard-badge-v2.jpg" alt="شعار GameYard الجديد"></div>
         <h1 id="title">GameYard</h1>
         <p class="lede">تشغيل GoldHEN تلقائيًا بالمحرك المناسب لإصدار جهازك، مع دعم الاستخدام دون اتصال بعد اكتمال التخزين لأول مرة.</p>
 

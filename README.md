@@ -33,3 +33,7 @@
 PS4 14.00 now routes to `afterglow/index.html`. Existing PS4 7.00–13.52 routes, runtime files, payloads and cache behavior are preserved. This is separate from the PS5 website.
 
 Source: https://github.com/well0nez/afterglow-web at acf25a831725f0d44fcb64725d4ce35acbba8f9d, with the same runtime files verified for Hazzaz and MOSGAME. Only branding, language, landing-page firmware guards and cache entries are customized. Original engine JavaScript and payload bytes are preserved. Source and AGPL/MIT license notices are included in `afterglow/`. Physical PS4 execution remains untested in this development environment.
+
+## تحديث هوية GameYard — 2026-11-10
+
+تم تحديث الصفحة الرئيسية وصفحات تثبيت الكاش وواجهة Afterglow بإضافة الصورة الشخصية الكرتونية والشعار الأخضر الجديد. تم تضمين الصور في ملفات التخزين دون اتصال مع الإبقاء على منطق الاستغلال والحمولات وأسماء ملفات التشغيل الأصلية دون تغيير. لا توجد اختبارات تشغيل على جهاز PS4 حقيقي لهذا التحديث البصري.

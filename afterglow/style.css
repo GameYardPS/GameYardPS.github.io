@@ -78,8 +78,8 @@ body {
 }
 
 .meme {
-  width: 520px;
-  max-width: 90vw;
+  width: 225px;
+  max-width: 48vw;
   height: auto;
   border: 1px solid rgba(98,215,45,.3);
   border-radius: 16px;
@@ -87,6 +87,17 @@ body {
 
 .panel {
   width: 300px;
+}
+
+.afterglow-portrait {
+  display: block;
+  width: 84px;
+  height: 84px;
+  object-fit: cover;
+  border: 2px solid #62d72d;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  box-shadow: 0 5px 26px rgba(98,215,45,.25);
 }
 
 .engine-name { color: #62d72d; }
