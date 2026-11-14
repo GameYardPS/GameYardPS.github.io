@@ -51,3 +51,7 @@ PS4 14.02 uses the isolated `webkitty/` route, pinned to ArabPixel/WebKitty comm
 Open the main site URL online for the first save. If Application Cache is unavailable, the host can run online without claiming offline support. Completed/restored 14.xx attempts wait for a fresh visit to the main URL before another attempt. Physical PS4 execution has not been tested in this development environment.
 
 Verification: `node tools/verify-host.mjs`.
+
+## Offline resume correction — 2026-11-14
+
+A failed online manifest check now resumes the existing complete cache when Application Cache returns to IDLE or has an update ready. UNCACHED, incomplete and OBSOLETE states still stop instead of reporting a successful save. Existing firmware cache markers are retained; a failed update does not advance their revision. The exact 14.00 execution URL, including its query string, is explicitly cached so offline navigation does not depend on a previous online execution having saved it as an implicit master entry. Regression checks cover these offline states; physical PS4 offline execution remains unverified here.

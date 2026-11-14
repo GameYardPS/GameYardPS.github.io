@@ -48,6 +48,33 @@ function harness({fw = '13.52', status = 1, noCache = false, localFail = false, 
 }
 function home(h) { h.run('auto-cache.js'); h.run('host.js'); }
 
+test('offline manifest check failure still starts the existing cached legacy engine',()=>{
+  const h=harness({status:2,local:{'gameyard-cache-slopkit':revision}});home(h);
+  h.sandbox.navigator.onLine=false;h.emit('error',1);
+  assert.equal(h.scripts.length,1);assert.equal(h.scripts[0].src,'slopkit/jb.js?v=19');
+  assert.equal(h.element('retry').hidden,true);h.advance(1000);assert.equal(h.scripts.length,1);
+});
+test('offline 14.02 uses its complete cache after an update check error',()=>{
+  const h=harness({fw:'14.02',status:2});h.run('auto-cache.js');h.run('webkitty/launch.js');
+  h.emit('error',1);assert.deepEqual(h.navigations,['exploit.html']);assert.equal(h.element('retry').hidden,true);
+});
+test('offline 14.00 still starts after a failed manifest check',()=>{
+  const h=harness({fw:'14.00',status:2});h.run('auto-cache.js');h.run('afterglow/auto-launch.js');
+  h.emit('error',1);assert.deepEqual(h.navigations,['jb.html?log=1&afterglow=run&mode=goldhen']);
+});
+test('14.00 execution URL including its query is explicitly cached',()=>{
+  const h=harness({fw:'14.00'});h.run('auto-cache.js');h.run('afterglow/auto-launch.js');h.advance(700);
+  const manifest=fs.readFileSync(path.join(root,'afterglow/cache.appcache'),'utf8');
+  const entries=manifest.split('\n').map(line=>line.trim().split(/\s+/)[0]);
+  assert.ok(entries.includes(h.navigations[0]),'offline navigation must match the exact cached URL');
+});
+test('obsolete and never-created caches cannot be used as an offline fallback',()=>{
+  for(const [event,status] of [['obsolete',5],['error',0],['error',3]]){
+    const h=harness({fw:'14.02',status:3});h.run('auto-cache.js');h.run('webkitty/launch.js');
+    h.emit(event,status);h.advance(1000);assert.equal(h.navigations.length,0);assert.equal(h.element('retry').hidden,false);
+  }
+});
+
 const routes = [
   ['7.00','700','700/alert.js'],['8.52','700','700/alert.js'],['9.00','900','900/alert.js'],['9.60','900','900/alert.js'],
   ['10.00','css','css/main.js'],['11.02','css','css/main.js'],['11.50','slopkit','slopkit/chain_lapse.js'],['12.02','slopkit','slopkit/chain_lapse.js'],

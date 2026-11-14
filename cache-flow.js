@@ -13,9 +13,9 @@
       msgs.textContent = "جارٍ حفظ الملفات... سيبدأ GoldHEN تلقائيًا بعد الاكتمال.";
     },
     onReady: function (result) {
-      GameYardCache.remember(group, result.cached);
+      GameYardCache.remember(group, result.cached && !result.fallback);
       bar.style.width = "100%"; percent.textContent = result.cached ? "100%" : "ONLINE";
-      msgs.textContent = result.cached ? "اكتمل الحفظ — جارٍ بدء التشغيل تلقائيًا" : "جارٍ بدء التشغيل عبر الاتصال الحالي";
+      msgs.textContent = result.fallback ? "الملفات المحفوظة جاهزة — جارٍ بدء التشغيل تلقائيًا" : result.cached ? "اكتمل الحفظ — جارٍ بدء التشغيل تلقائيًا" : "جارٍ بدء التشغيل عبر الاتصال الحالي";
       msgs.className = "ok";
       setTimeout(function () { location.replace("index.html" + GameYardCache.marker(group)); }, 500);
     },

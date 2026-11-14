@@ -20,7 +20,7 @@
     },
     onReady: function (result) {
       if (started) return; started = true;
-      cache.textContent = result.cached ? "اكتمل حفظ الملفات." : "التشغيل عبر الاتصال الحالي.";
+      cache.textContent = result.fallback ? "جارٍ التشغيل من الملفات المحفوظة؛ تعذّر فحص التحديث فقط." : result.cached ? "اكتمل حفظ الملفات." : "التشغيل عبر الاتصال الحالي.";
       state.textContent = "جارٍ تشغيل GoldHEN تلقائيًا...";
       try { sessionStorage.setItem(key, "running"); } catch (e) {}
       location.href = "jb.html?log=1&afterglow=run&mode=goldhen";

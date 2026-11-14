@@ -34,11 +34,11 @@
     setTimeout(function () { location.replace(route.page); }, 500);
     return;
   }
-  function start() {
+  function start(result) {
     if (launched) return;
     launched = true;
     message("جارٍ تشغيل GoldHEN... أبقِ الصفحة مفتوحة", "warn");
-    cache.textContent = GameYardCache.appCache() ? "اكتمل حفظ ملفات إصدارك." : "التشغيل عبر الاتصال الحالي؛ التخزين دون اتصال غير متاح في هذا المتصفح.";
+    cache.textContent = result && result.fallback ? "جارٍ التشغيل من الملفات المحفوظة؛ تعذّر فحص تحديثات الإنترنت فقط." : GameYardCache.appCache() ? "اكتمل حفظ ملفات إصدارك." : "التشغيل عبر الاتصال الحالي؛ التخزين دون اتصال غير متاح في هذا المتصفح.";
     var script = document.createElement("script");
     if (route.module) script.type = "module";
     script.src = route.src; script.onerror = fail;

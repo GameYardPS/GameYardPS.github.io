@@ -33,7 +33,7 @@
       }
       bar.style.width = "100%";
       state.textContent = "جارٍ تشغيل GoldHEN تلقائيًا...";
-      cache.textContent = result.cached ? "اكتمل حفظ ملفات 14.02." : "التشغيل عبر الاتصال الحالي؛ التخزين دون اتصال غير متاح في هذا المتصفح.";
+      cache.textContent = result.fallback ? "ملفات 14.02 المحفوظة جاهزة؛ تعذّر فحص تحديثات الإنترنت فقط." : result.cached ? "اكتمل حفظ ملفات 14.02." : "التشغيل عبر الاتصال الحالي؛ التخزين دون اتصال غير متاح في هذا المتصفح.";
       location.href = "exploit.html";
     },
     onError: function () {

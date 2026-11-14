@@ -1,7 +1,8 @@
 CACHE MANIFEST
-# GameYard automatic GoldHEN v7 / 2026-11-14
+# GameYard offline resume fix v8 / 2026-11-14
 
 CACHE:
+jb.html?log=1&afterglow=run&mode=goldhen
 # 2026-11-04T09:53:20Z
 
 index.html #e6e5c5dfc62fdda4eb3fe6061494cef2

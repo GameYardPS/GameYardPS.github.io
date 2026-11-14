@@ -28,18 +28,26 @@
       settled = true; clean();
       options.onError();
     }
-    function done(cached) {
+    function done(cached, fallback) {
       if (settled) return;
       if (ac && ac.status === 4) {
         try { ac.swapCache(); } catch (e) { fail(); return; }
       }
       settled = true; clean();
-      options.onReady({ cached: cached });
+      options.onReady({ cached: cached, fallback: !!fallback });
     }
     function change(event) {
       if (settled) return;
       var type = event.type;
-      if (type === "error" || type === "obsolete") { fail(); return; }
+      if (type === "obsolete") { fail(); return; }
+      if (type === "error") {
+        /* A failed update check does not invalidate an existing complete
+           cache. In particular, checking the manifest while offline raises
+           error, with the previous usable cache returning to IDLE. */
+        if (ac.status === 1 || ac.status === 4) done(true, true);
+        else fail();
+        return;
+      }
       if (type === "cached" || type === "noupdate" || type === "updateready") { done(true); return; }
       if (options.onProgress) options.onProgress(event);
     }
