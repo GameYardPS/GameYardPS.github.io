@@ -1,0 +1,12 @@
+{
+  "base_commit": "8a9b914ddde64f811db503a35fc087595106c5c2",
+  "preserved_original_files": 116,
+  "brand": "GameYard",
+  "brand_assets": [
+    "gameyard-logo.jpeg",
+    "gameyard-mark.jpg",
+    "gameyard-portrait-v3.jpg",
+    "gameyard-badge-v3.jpg"
+  ],
+  "expected_repo": "GameYardPS/GameYardPS.github.io"
+}

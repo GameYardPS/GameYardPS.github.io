@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#08090c" />
     <title>GameYard | Afterglow 14.00</title>
     <link rel="stylesheet" href="style.css" />
-  </head>
+  <style>[hidden]{display:none!important}</style></head>
   <body>
     <!-- Every run starts from here. The referrer guard in jb.js arms the chain
          only when it was reached from this page, so that a browser restoring
@@ -20,29 +20,12 @@
         <img class="afterglow-portrait" src="../gameyard-portrait-v3.jpg" alt="الصورة الشخصية الكرتونية لـGameYard" />
         <p class="lede">تشغيل GoldHEN عبر Afterglow<br /><span dir="ltr">PS4 13.52 / 14.00 • Beta</span></p>
 
-        <form class="pick" id="pick">
-          <label class="opt">
-            <input type="radio" name="payload" value="hen" />
-            <span>ps4-hen</span>
-          </label>
-          <label class="opt">
-            <input type="radio" name="payload" value="goldhen" checked />
-            <span>GoldHEN</span>
-          </label>
-
-          <label class="opt opt-auto">
-            <input type="checkbox" id="auto" checked />
-            <span>تشغيل تلقائي بعد 5 ثوانٍ</span>
-          </label>
-
-          <button class="btn" type="submit">تشغيل الآن</button>
-          <p class="count" id="count"></p>
-          <p class="count" id="cache" aria-live="polite"></p>
-        </form>
+        <div class="pick" aria-live="polite"><p class="count" id="count">جارٍ تجهيز التشغيل التلقائي...</p><p class="count" id="cache"></p><button class="btn" id="retry" type="button" hidden>إعادة المحاولة</button></div>
       </main>
     </div>
 
     <p class="byline"><a href="../index.html">GameYard</a> &middot; by well0nez/m0zz &middot; <a href="https://github.com/GameYardPS/GameYardPS.github.io/tree/main/afterglow">المصدر والترخيص</a></p>
-    <script src="launch.js"></script>
+    <script src="../auto-cache.js"></script>
+<script src="auto-launch.js"></script>
   </body>
 </html>

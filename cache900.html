@@ -20,31 +20,21 @@
 /* PS4 WebKit fallback (CSS min() unsupported on some firmware builds) */
 .card { width: 94%; max-width: 760px; }
 </style>
-</head>
-<body>
+<style>[hidden]{display:none!important}</style></head>
+<body data-cache-group="900">
   <main class="shell">
     <section class="card">
       <div class="brand"><img src="./gameyard-portrait-v3.jpg" alt="الصورة الشخصية"><img src="./gameyard-badge-v3.jpg" alt="شعار GameYard الجديد"><span><strong>GameYard</strong><small>PS4 MULTI-FIRMWARE HOST</small></span></div>
       <span class="tag">9.00–9.60</span>
-      <h1>تثبيت ملفات إصدارك</h1>
+      <h1>حفظ الملفات تلقائيًا</h1>
       <p id="msgs">جارٍ بدء التخزين دون اتصال…</p>
       <div class="track" aria-hidden="true"><div id="bar"></div></div>
       <div class="percent" id="percent">0%</div>
-      <button id="go" type="button" disabled>جارٍ التثبيت…</button>
+      <button class="run" id="go" type="button" hidden>إعادة المحاولة</button>
       <p class="note">أبقِ الصفحة مفتوحة والإنترنت متصلًا حتى يكتمل التثبيت.</p>
     </section>
   </main>
-  <script>
-  (function(){
-    var msgs=document.getElementById("msgs"),bar=document.getElementById("bar"),percent=document.getElementById("percent"),go=document.getElementById("go"),ac=window.applicationCache,finished=false;
-    try{history.replaceState(null,null,"index.html")}catch(e){}
-    function progress(e){var p=e&&e.total?Math.round(e.loaded/e.total*100):0;if(p>0){bar.style.width=p+"%";percent.textContent=p+"%";msgs.textContent="جارٍ حفظ ملفات التشغيل…"}}
-    function done(){if(finished)return;finished=true;try{if(ac.status===ac.UPDATEREADY)ac.swapCache()}catch(e){}try{localStorage.setItem("multifw-cache-v2","1")}catch(e){}bar.style.width="100%";percent.textContent="100%";msgs.textContent="تم حفظ الملفات بنجاح — يمكنك الآن تشغيل GoldHEN";msgs.className="ok";go.disabled=false;go.textContent="العودة إلى التشغيل"}
-    function failed(){msgs.textContent="تعذر تثبيت الملفات. امسح بيانات متصفح PS4 ثم أعد المحاولة.";msgs.className="bad";go.disabled=false;go.textContent="إعادة المحاولة";go.onclick=function(){location.reload()}}
-    go.onclick=function(){location.replace("index.html")};
-    if(!ac){failed();return}ac.addEventListener("progress",progress,false);ac.addEventListener("cached",done,false);ac.addEventListener("updateready",done,false);ac.addEventListener("noupdate",done,false);ac.addEventListener("error",failed,false);
-    setTimeout(function(){if(ac.status===ac.IDLE||ac.status===ac.UPDATEREADY)done()},700);
-  })();
-  </script>
+  <script src="auto-cache.js"></script>
+<script src="cache-flow.js"></script>
 </body>
 </html>

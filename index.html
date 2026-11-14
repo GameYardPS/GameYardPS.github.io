@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#07110a">
-  <meta name="site-version" content="gameyard-multifw-v6-ps4-browser-fix-20261110">
+  <meta name="site-version" content="gameyard-multifw-auto-v7-20261114">
   <meta name="source-revision" content="gamerhack/g2all-2026-10-06">
-  <meta name="description" content="واجهة GameYard لتشغيل GoldHEN على إصدارات PS4 المدعومة من 7.00 إلى 14.00.">
-  <title>GameYard | PS4 7.00–14.00 Host</title>
+  <meta name="description" content="واجهة GameYard لتشغيل GoldHEN على إصدارات PS4 المدعومة من 7.00 إلى 14.02.">
+  <title>GameYard | PS4 7.00–14.02 Host</title>
   <link rel="icon" type="image/jpeg" href="./gameyard-badge-v3.jpg">
   <style>
     * { box-sizing: border-box; }
@@ -223,6 +223,7 @@
       #msgs { font-size: 16px; }
     }
   </style>
+<style>[hidden]{display:none!important}.run[role="status"]{cursor:default;pointer-events:none}</style>
 </head>
 <body>
   <div class="shell">
@@ -231,7 +232,7 @@
         <span class="mark"><img src="./gameyard-portrait-v3.jpg" alt="صورة GameYard"></span>
         <span class="brand-copy"><strong>GameYard</strong><small>Gaming Center</small></span>
       </a>
-      <span class="version-chip">PS4&nbsp; • &nbsp;7.00–14.00</span>
+      <span class="version-chip">PS4&nbsp; • &nbsp;7.00–14.02</span>
     </header>
 
     <main>
@@ -242,7 +243,7 @@
         <p class="lede">تشغيل GoldHEN تلقائيًا بالمحرك المناسب لإصدار جهازك، مع دعم الاستخدام دون اتصال بعد اكتمال التخزين لأول مرة.</p>
 
         <div class="firmwares" aria-label="الإصدارات المدعومة">
-          <span>7.00–8.52</span><span>9.00–9.60</span><span>10.00–11.02</span><span>11.50–12.02</span><span>12.50–13.00</span><span>13.02–13.52</span><span>14.00 • Afterglow</span>
+          <span>7.00–8.52</span><span>9.00–9.60</span><span>10.00–11.02</span><span>11.50–12.02</span><span>12.50–13.00</span><span>13.02–13.52</span><span>14.00 / 14.02 • Afterglow / WebKitty</span>
         </div>
 
         <div class="status-card" aria-live="polite">
@@ -252,10 +253,11 @@
           <div id="state"></div><pre id="out"></pre>
         </div>
 
-        <button class="run" id="run" type="button" disabled>
-          <span class="play">▶</span><span id="run-label">انتظر قليلًا</span>
-        </button>
-        <p class="hint">اضغط الزر X بعد ظهور «جاهز». في أول زيارة سيتم حفظ ملفات إصدارك للاستخدام دون اتصال. إصدار 14.00 يعمل عبر Afterglow التجريبي.</p>
+        <div role="status" class="run" id="run">
+          <span class="play">↻</span><span id="run-label">التشغيل التلقائي</span>
+        </div>
+<button id="retry" class="run" type="button" hidden>إعادة المحاولة</button>
+        <p class="hint">افتح الرابط وانتظر فقط. يُكتشف الإصدار وتُحفظ الملفات ويبدأ GoldHEN تلقائيًا. أبقِ الإنترنت متصلًا في أول زيارة حتى اكتمال الحفظ.</p>
         <a class="contact" href="tel:0944227117" aria-label="اتصل بمتجر GameYard على الرقم 0944227117">0944227117</a>
       </section>
     </main>
@@ -263,92 +265,7 @@
     <footer>GameYard • Tripoli • Engine: GamerHack / PSFree / GoldHEN contributors</footer>
   </div>
 
-  <script>
-  (function () {
-      var msgsEl = document.getElementById("msgs");
-      var detEl = document.getElementById("det");
-      var cacheEl = document.getElementById("cache");
-      var runEl = document.getElementById("run");
-      var runLabelEl = document.getElementById("run-label");
-      var launched = false;
-      window.msgs = msgsEl;
-
-      function setMessage(text, cssClass) { msgsEl.textContent = text; msgsEl.className = cssClass || ""; }
-      function setCache(text, ok) { cacheEl.textContent = text; cacheEl.className = ok ? "cacheok" : ""; }
-      function arm(label) { runLabelEl.textContent = label; runEl.disabled = false; try { runEl.focus(); } catch (e) {} }
-      function disarm(label) { runLabelEl.textContent = label; runEl.disabled = true; }
-      function routeFor(fw) {
-          if (fw === 14.00) return { page: "afterglow/index.html", label: "تشغيل GoldHEN — Afterglow" };
-          if (fw >= 7.00 && fw <= 8.52) return { cache: "cache700.html", src: "700/alert.js", module: true };
-          if (fw >= 9.00 && fw <= 9.60) return { cache: "cache900.html", src: "900/alert.js", module: true };
-          if (fw >= 10.00 && fw <= 11.02) return { cache: "cachecss.html", src: "css/main.js", css: true };
-          if (fw >= 11.50 && fw <= 12.02) return { cache: "cacheslopkit.html", src: "slopkit/chain_lapse.js", module: true };
-          if (fw >= 12.50 && fw <= 13.00) return { cache: "cacheslopkit.html", src: "slopkit/chain_poops.js", module: true };
-          if (fw >= 13.02 && fw <= 13.52) return { cache: "cacheslopkit.html", src: "slopkit/jb.js?v=19", module: true };
-          return null;
-      }
-      function loadExploit(route) {
-          setMessage("جارٍ تشغيل GoldHEN... لا تغلق الصفحة", "warn");
-          setCache("تم اختيار المحرك المناسب لإصدار جهازك.", true);
-          var script = document.createElement("script");
-          if (route.module) script.type = "module";
-          script.src = route.src;
-          script.onerror = function () {
-              launched = false;
-              setMessage("تعذر تحميل ملفات التشغيل — امسح بيانات المتصفح وثبّت التخزين من جديد", "bad");
-              arm("إعادة المحاولة");
-          };
-          if (route.css) script.onload = function () { setTimeout(function () { doJb(); }, 500); };
-          document.head.appendChild(script);
-      }
-
-      var match = navigator.userAgent.match(/PlayStation 4[ \/]([\d.]+)/i);
-      var firmwareText = match ? match[1] : "UNKNOWN";
-      var firmware = match ? parseFloat(firmwareText) : NaN;
-      var route = match ? routeFor(firmware) : null;
-      detEl.innerHTML = "FIRMWARE <b>" + firmwareText + "</b>" + (route ? " &nbsp;•&nbsp; <b>SUPPORTED</b>" : " &nbsp;•&nbsp; UNSUPPORTED");
-
-      if (!match) {
-          setMessage("افتح هذا الرابط من متصفح جهاز PS4", "warn");
-          setCache("سيتم اكتشاف الإصدار واختيار المحرك تلقائيًا.", false);
-          disarm("متاح على PS4 فقط");
-          return;
-      }
-      if (!route) {
-          setMessage("الإصدار " + firmwareText + " غير مدعوم في هذه الحزمة", "bad");
-          setCache("النطاقات المدعومة موضحة أعلى الزر.", false);
-          disarm("إصدار غير مدعوم");
-          return;
-      }
-
-  if(route.page){setMessage("تم اكتشاف الإصدار "+firmwareText+" — جاهز","ok");setCache("Afterglow • GoldHEN • نسخة تجريبية",true);arm(route.label);runEl.addEventListener("click",openAfterglow,false);window.addEventListener("keydown",function(e){if(e&&(e.keyCode===13||e.keyCode===32))openAfterglow()},false);function openAfterglow(){if(runEl.disabled||launched)return;launched=true;disarm("جارٍ فتح Afterglow...");location.href=route.page}return}
-      var cacheReady = false;
-      try { cacheReady = localStorage.getItem("multifw-cache-v2") === "1"; } catch (e) {}
-      setMessage("تم اكتشاف الإصدار " + firmwareText + " — جاهز", "ok");
-      if (window.applicationCache && window.applicationCache.status !== 0 && cacheReady) {
-          setCache("ملفات إصدارك محفوظة — يمكن التشغيل دون اتصال", true);
-          arm("تشغيل GoldHEN");
-      } else {
-          setCache("يلزم حفظ ملفات إصدارك في الزيارة الأولى.", false);
-          arm("تثبيت الملفات");
-      }
-
-      function fire() {
-          if (runEl.disabled || launched) return;
-          launched = true;
-          disarm("جارٍ التشغيل...");
-          if (!window.applicationCache || window.applicationCache.status === 0 || !cacheReady) {
-              setMessage("جارٍ فتح صفحة تثبيت ملفات إصدارك...", "warn");
-              location.replace(route.cache);
-              return;
-          }
-          loadExploit(route);
-      }
-      runEl.addEventListener("click", fire, false);
-      window.addEventListener("keydown", function (event) {
-          if (!runEl.disabled && (!event || event.keyCode === 13 || event.keyCode === 32)) fire();
-      }, false);
-  })();
-  </script>
+  <script src="auto-cache.js"></script>
+<script src="host.js"></script>
 </body>
 </html>

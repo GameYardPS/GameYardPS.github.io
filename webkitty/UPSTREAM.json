@@ -1,0 +1,18 @@
+{
+  "repository": "https://github.com/ArabPixel/WebKitty",
+  "commit": "8c8ee71bc7622dcb80713889029d6a16c8a269ab",
+  "integration_date": "2026-11-14",
+  "firmware": "14.02",
+  "goldhen": "v2.4b18.14",
+  "goldhen_sha256": "c5480587d99efc2e3cc132352d9b7cf052dd3068280f1686e7fbb37d57e9ba8b",
+  "upstream_git_blobs": {
+    "src/slopkit-afterglow/core.js": "d57927566fba55953a6852ecbc325924a2aa7d41",
+    "src/slopkit-afterglow/mem.js": "e60e96f9f33b3a5ad592721f4b4f17e4196b2976",
+    "src/slopkit-afterglow/int64.js": "ee8d9e6c7e8d4538449fb5eec02062c4fc64e0ef",
+    "src/slopkit-afterglow/ps4_offsets.js": "f67b1624b205ea0580d49b5b87b482d4e09328bd",
+    "src/slopkit-afterglow/afterglow.js": "6757fbf9e93faefadc3aa3f93c6362a6fb639c23",
+    "src/slopkit-afterglow/jb.js": "36ca0626f4d39097e69c0cd6889031469164c117",
+    "includes/payloads/HEN/goldhen_v2.4b18.14.bin": "2d04ed98d2af86677472278d47eefa1fec45bb48",
+    "LICENSE": "be3f7b28e564e7dd05eaf59d64adba1a4065ac0e"
+  }
+}

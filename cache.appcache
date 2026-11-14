@@ -1,8 +1,12 @@
 CACHE MANIFEST
-# GameYard PS4 verified portrait and badge / 2026-11-10 / v6
+# GameYard automatic GoldHEN v7 / 2026-11-14 / 14.02
 # Legacy cache migration: GameYard multi-firmware v3 / 2026-10-06
 
 CACHE:
+./
+auto-cache.js
+host.js
+cache-flow.js
 index.html
 gameyard-logo.jpeg
 gameyard-mark.jpg

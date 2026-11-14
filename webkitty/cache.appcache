@@ -1,0 +1,27 @@
+CACHE MANIFEST
+# GameYard automatic 14.02 GoldHEN v7 / 2026-11-14
+
+CACHE:
+index.html
+launch.js
+exploit.html
+bridge.js
+../
+../index.html
+../auto-cache.js
+../host.js
+../afterglow/style.css
+../gameyard-logo.jpeg
+../gameyard-mark.jpg
+../gameyard-portrait-v3.jpg
+../gameyard-badge-v3.jpg
+src/slopkit-afterglow/core.js
+src/slopkit-afterglow/mem.js
+src/slopkit-afterglow/int64.js
+src/slopkit-afterglow/ps4_offsets.js
+src/slopkit-afterglow/afterglow.js
+src/slopkit-afterglow/jb.js
+includes/payloads/HEN/goldhen_v2.4b18.14.bin
+
+NETWORK:
+*

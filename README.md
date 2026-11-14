@@ -41,3 +41,13 @@ Source: https://github.com/well0nez/afterglow-web at acf25a831725f0d44fcb64725d4
 ## إصلاح الصور والتوافق مع متصفح PS4 — v6
 
 الصور السابقة كانت تالفة أثناء رفع الملفات. تم رفع صورتَي الهوية الجديدتين مع التحقق من Git blob SHA1 مطابقًا للملفات المحلية، وإصلاح مساحات الواجهة باستبدال دوال CSS الحديثة غير المدعومة في بعض متصفحات PS4. تحديث manifests لإجبار إعادة التخزين. لا تغيير في JavaScript الخاص بالاستغلال أو payload binaries. لم يُختبر على PS4 حقيقي بعد.
+
+## PS4 14.02 and automatic GoldHEN — 2026-11-14
+
+The host automatically detects the firmware, saves its offline files on the first visit, then starts GoldHEN without install or launch clicks. Earlier firmware keeps its existing engine and payload bytes. Each firmware cache group has an independent revision marker. Downloads and updates finish before an engine is loaded; a cache error stops the attempt and displays a retry control.
+
+PS4 14.02 uses the isolated `webkitty/` route, pinned to ArabPixel/WebKitty commit `8c8ee71bc7622dcb80713889029d6a16c8a269ab`, with its unmodified six engine modules and GoldHEN v2.4b18.14. See `webkitty/UPSTREAM.json`, source headers and licenses. No runtime assets are fetched from another shop's site. The existing shop artwork, colors, contact information and older firmware routes are preserved.
+
+Open the main site URL online for the first save. If Application Cache is unavailable, the host can run online without claiming offline support. Completed/restored 14.xx attempts wait for a fresh visit to the main URL before another attempt. Physical PS4 execution has not been tested in this development environment.
+
+Verification: `node tools/verify-host.mjs`.
