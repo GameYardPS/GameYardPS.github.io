@@ -223,7 +223,19 @@
       #msgs { font-size: 16px; }
     }
   </style>
-<style>[hidden]{display:none!important}.run[role="status"]{cursor:default;pointer-events:none}</style>
+<style>[hidden]{display:none!important}.run[role="status"]{cursor:default;pointer-events:none}
+    .system-release {
+      margin: 6px 0 0;
+      padding: 0 12px;
+      color: #c3c7c9;
+      font: 13px/1.6 Tahoma, Arial, sans-serif;
+      text-align: center;
+      letter-spacing: normal;
+      text-transform: none;
+    }
+    .system-release a { color: inherit; text-decoration: underline; }
+    .system-release a:focus { outline: 2px solid currentColor; outline-offset: 2px; }
+  </style>
 </head>
 <body>
   <div class="shell">
@@ -262,7 +274,9 @@
       </section>
     </main>
 
-    <footer>GameYard • Tripoli • Engine: GamerHack / PSFree / GoldHEN contributors</footer>
+    <footer>GameYard • Tripoli • Engine: GamerHack / PSFree / GoldHEN contributors
+      <p class="system-release" dir="rtl">أضافت سوني إصلاحات أمنية في إصدار <bdi dir="ltr">PS4 14.02</bdi>. <a href="https://www.playstation.com/ar-ae/support/hardware/ps4/system-software-info/">ملاحظات الإصدار</a></p>
+    </footer>
   </div>
 
   <script src="auto-cache.js"></script>
