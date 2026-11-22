@@ -30,7 +30,7 @@ while True:
             if dims==(512,512):found.append((p,cur))
             break
 assert len(found)==1,f'Expected one 512x512 PNG resource, got {len(found)}'
-a,b=found
+a,b=found[0]
 img=Image.open(ICON).convert('RGB').resize((512,512),Image.Resampling.LANCZOS)
 payload=None
 for colors in (256,192,128,96,64,48,32,24,16):
