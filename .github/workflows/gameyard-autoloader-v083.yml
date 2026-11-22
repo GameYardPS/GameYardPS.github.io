@@ -1,0 +1,52 @@
+name: GameYard PS5 Autoloader v0.8.3 (visual-only)
+on:
+  push:
+    branches:
+      - feature/autoloader-v083-gameyard
+    paths:
+      - .github/workflows/gameyard-autoloader-v083.yml
+      - tools/gameyard/**
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  verify-and-brand:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout branding tool
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Pillow
+        run: python -m pip install 'Pillow==11.3.0'
+      - name: Fetch official v0.8.3 release and existing GameYard logo
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p release
+          curl -fLSs --retry 3 -o upstream.elf 'https://github.com/itsPLK/ps5-webkit-autoloader/releases/download/v0.8.3/webkit-autoloader-installer_v0.8.3.elf'
+          echo 'f4b0dee9af572ea1cb77aaf1e6fc5bf8ef520fc0a0a30753dd94a5cbdc04dd8e  upstream.elf' | sha256sum -c -
+          curl -fLSs --retry 3 -o release/webkit-autoloader-host_v0.8.3.py 'https://github.com/itsPLK/ps5-webkit-autoloader/releases/download/v0.8.3/webkit-autoloader-host_v0.8.3.py'
+          echo '958a0f4f1211b71cfe1270fe767f429c0d1a879972947e55367de795f6ff0ca5  release/webkit-autoloader-host_v0.8.3.py' | sha256sum -c -
+          curl -fLSs --retry 3 -o gameyard-icon.jpeg 'https://raw.githubusercontent.com/GameYardPS/GameYardPS.github.io/main/gameyard-logo.jpeg'
+      - name: Apply visual-only home icon brand
+        run: |
+          python tools/gameyard/autoloader_083_icon_patch.py upstream.elf gameyard-icon.jpeg release/GameYard_Autoloader_Installer_v0.8.3_visual_r7.elf
+          file release/GameYard_Autoloader_Installer_v0.8.3_visual_r7.elf
+          sha256sum release/*.elf release/*.py > release/SHA256SUMS.txt
+          cp tools/gameyard/README_autoloader_083.md release/README.md
+      - name: Upload verified GameYard PS5 installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: GameYard_PS5_Autoloader_v0.8.3_visual_r7
+          path: release/*
+          retention-days: 30
+          if-no-files-found: error
